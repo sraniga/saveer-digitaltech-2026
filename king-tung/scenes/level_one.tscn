@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bn3lgnpv7rprw"]
+
+[ext_resource type="PackedScene" uid="uid://bqredpdd7q4l0" path="res://scenes/tung_character.tscn" id="1_cd1xg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgp6g"]
+size = Vector2(12005, 100)
+
+[node name="Node2D" type="Node2D" unique_id=1658184175]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1045525557]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=60637843]
+position = Vector2(3513.5, 696)
+shape = SubResource("RectangleShape2D_sgp6g")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=304137241]
+offset_left = -2487.0
+offset_top = 646.0
+offset_right = 9516.0
+offset_bottom = 746.0
+
+[node name="CharacterBody2D" parent="." unique_id=1981202395 instance=ExtResource("1_cd1xg")]
+position = Vector2(40, 544)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=564998179]
+position = Vector2(281, -146)
