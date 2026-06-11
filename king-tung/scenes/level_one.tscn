@@ -5,6 +5,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgp6g"]
 size = Vector2(12005, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cd1xg"]
+size = Vector2(531.5, 34)
+
 [node name="Node2D" type="Node2D" unique_id=1658184175]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1045525557]
@@ -13,14 +16,26 @@ size = Vector2(12005, 100)
 position = Vector2(3513.5, 696)
 shape = SubResource("RectangleShape2D_sgp6g")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1314351126]
+position = Vector2(793, 577)
+shape = SubResource("RectangleShape2D_cd1xg")
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=304137241]
 offset_left = -2487.0
 offset_top = 646.0
 offset_right = 9516.0
 offset_bottom = 746.0
+color = Color(0.19973177, 0.19973174, 0.19973174, 1)
 
 [node name="CharacterBody2D" parent="." unique_id=1981202395 instance=ExtResource("1_cd1xg")]
-position = Vector2(40, 544)
+position = Vector2(40, 590)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=564998179]
-position = Vector2(281, -146)
+position = Vector2(281, -180)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=718771573]
+offset_left = 527.0
+offset_top = 560.0
+offset_right = 1059.0
+offset_bottom = 594.0
+color = Color(0.2, 0.2, 0.2, 1)
