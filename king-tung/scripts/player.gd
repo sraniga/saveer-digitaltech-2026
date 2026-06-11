@@ -3,6 +3,8 @@ extends CharacterBody2D
 const SPEED = 300
 const JUMP_VELOCITY = -500
 
+@export var animation: AnimationPlayer
+
 
 func _physics_process(delta: float) -> void:
 	#add the gravity
