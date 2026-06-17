@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://bn3lgnpv7rprw"]
 
 [ext_resource type="PackedScene" uid="uid://bqredpdd7q4l0" path="res://scenes/tung_character.tscn" id="1_cd1xg"]
+[ext_resource type="PackedScene" uid="uid://di8ss3cjc6fto" path="res://scenes/baby_shark.tscn" id="2_843q2"]
+[ext_resource type="Script" uid="uid://bq6krsr881aq5" path="res://scripts/baby_shark.gd" id="3_5rfim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgp6g"]
 size = Vector2(12005, 100)
@@ -9,11 +11,12 @@ size = Vector2(12005, 100)
 size = Vector2(531.5, 34)
 
 [sub_resource type="Animation" id="Animation_cd1xg"]
+resource_name = "swing"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D:rotation")
+tracks/0/path = NodePath("CharacterBody2D/Area2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +28,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -35,38 +38,9 @@ tracks/1/keys = {
 "values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_t18mc"]
-resource_name = "player_attack"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Area2D/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.045),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.08),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.4835298]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_843q2"]
 _data = {
-&"RESET": SubResource("Animation_cd1xg"),
-&"player_attack": SubResource("Animation_t18mc")
+&"swing": SubResource("Animation_cd1xg")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rfim"]
@@ -94,10 +68,29 @@ color = Color(0.19973177, 0.19973174, 0.19973174, 1)
 
 [node name="CharacterBody2D" parent="." unique_id=1981202395 node_paths=PackedStringArray("animation") instance=ExtResource("1_cd1xg")]
 position = Vector2(40, 590)
-animation = NodePath("../Area2D/AnimationPlayer")
+animation = NodePath("Area2D/AnimationPlayer")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=564998179]
 position = Vector2(281, -180)
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D" unique_id=264018145]
+position = Vector2(24, 10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/Area2D" unique_id=922446303]
+root_node = NodePath("../../..")
+libraries/ = SubResource("AnimationLibrary_843q2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D" unique_id=177811393]
+position = Vector2(0, -22)
+shape = SubResource("CapsuleShape2D_5rfim")
+disabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CharacterBody2D/Area2D/CollisionShape2D" unique_id=1042826258]
+offset_left = -3.0
+offset_top = -23.0
+offset_right = 3.0
+offset_bottom = 23.0
+color = Color(0.3882353, 0.23137255, 0.13333334, 1)
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=718771573]
 offset_left = 527.0
@@ -106,21 +99,9 @@ offset_right = 1059.0
 offset_bottom = 594.0
 color = Color(0.2, 0.2, 0.2, 1)
 
-[node name="Area2D" type="Area2D" parent="." unique_id=264018145]
-position = Vector2(64, 600)
+[node name="CharacterBody2D2" parent="." unique_id=1139809648 node_paths=PackedStringArray("player") instance=ExtResource("2_843q2")]
+position = Vector2(632, 527)
+script = ExtResource("3_5rfim")
+player = NodePath("../CharacterBody2D")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D" unique_id=922446303]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_843q2")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=177811393]
-position = Vector2(0, -22)
-shape = SubResource("CapsuleShape2D_5rfim")
-disabled = true
-
-[node name="ColorRect" type="ColorRect" parent="Area2D/CollisionShape2D" unique_id=1042826258]
-offset_left = -3.0
-offset_top = -23.0
-offset_right = 3.0
-offset_bottom = 23.0
-color = Color(0.3882353, 0.23137255, 0.13333334, 1)
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="CharacterBody2D2" method="_on_area_2d_body_entered"]

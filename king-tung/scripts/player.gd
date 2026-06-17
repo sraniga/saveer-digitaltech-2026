@@ -21,4 +21,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
+	if Input.is_action_just_pressed("swing_bat"):
+		animation.play("swing")
+		
 	move_and_slide()
+	
+	
