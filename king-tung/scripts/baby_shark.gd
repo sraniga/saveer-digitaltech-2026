@@ -7,6 +7,10 @@ var health : int = 3
 @export var player: CharacterBody2D
 
 func _physics_process(delta: float) -> void:
+	
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+		
 	if player:
 		var direction: Vector2 = global_position.direction_to(player.global_position)
 		

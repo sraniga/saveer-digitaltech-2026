@@ -36,3 +36,9 @@ func take_damage() -> void:
 		health_ui.value = health
 	else:
 		get_tree().call_deferred("reload_current_scene")
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		body.take_damage()
+		
