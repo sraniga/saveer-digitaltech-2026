@@ -3,7 +3,10 @@ extends CharacterBody2D
 const SPEED = 300
 const JUMP_VELOCITY = -500
 
+var health: int = 10
+
 @export var animation: AnimationPlayer
+@export var health_ui: ProgressBar
 
 
 func _physics_process(delta: float) -> void:
@@ -27,3 +30,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	
+func take_damage() -> void:
+	if health > 1:
+		health -= 1
+		health_ui.value = health
+	else:
+		get_tree().call_deferred("reload_current_scene")

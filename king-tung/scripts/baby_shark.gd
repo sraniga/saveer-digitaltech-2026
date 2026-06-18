@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-const SPEED = 300
+const SPEED = 200
+
+var health : int = 3
 
 @export var player: CharacterBody2D
 
@@ -10,3 +12,10 @@ func _physics_process(delta: float) -> void:
 		
 		velocity = direction * SPEED
 		move_and_slide()
+		
+		
+func take_damage() -> void:
+	if health > 1:
+		health -= 1
+	else:
+		queue_free()
