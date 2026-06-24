@@ -3,15 +3,23 @@
 [ext_resource type="Script" uid="uid://bq6krsr881aq5" path="res://scripts/baby_shark.gd" id="1_6p34f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_foc14"]
-radius = 35.0
-height = 84.0
+radius = 37.0
+height = 90.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1139809648 node_paths=PackedStringArray("player") groups=["enemy"]]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6p34f"]
+radius = 36.0
+height = 86.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6p34f"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cr3mm"]
+bg_color = Color(0.4392157, 0.8, 0.23137255, 1)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1139809648 node_paths=PackedStringArray("player", "health_ui") groups=["enemy"]]
 script = ExtResource("1_6p34f")
 player = NodePath(".")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1451342504]
-shape = SubResource("CapsuleShape2D_foc14")
+health_ui = NodePath("ProgressBar")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2021582271]
 offset_left = -27.0
@@ -19,3 +27,23 @@ offset_top = -30.0
 offset_right = 26.0
 offset_bottom = 31.0
 color = Color(0.017199984, 0.6493, 0.86, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1747938398]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1451342504]
+shape = SubResource("CapsuleShape2D_foc14")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105395981]
+shape = SubResource("CapsuleShape2D_6p34f")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=503924205]
+offset_left = -56.0
+offset_top = -69.0
+offset_right = 56.0
+offset_bottom = -52.0
+theme_override_styles/background = SubResource("StyleBoxFlat_6p34f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_cr3mm")
+value = 100.0
+show_percentage = false
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

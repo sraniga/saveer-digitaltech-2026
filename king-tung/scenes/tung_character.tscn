@@ -6,7 +6,7 @@
 radius = 20.0
 height = 110.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1981202395]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1981202395 groups=["player"]]
 script = ExtResource("1_s4kpq")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1194137619]

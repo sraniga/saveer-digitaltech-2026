@@ -8,6 +8,10 @@ var health: int = 10
 @export var animation: AnimationPlayer
 @export var health_ui: ProgressBar
 
+func _ready() -> void:
+	health_ui.max_value = health
+	health_ui.value = health
+
 
 func _physics_process(delta: float) -> void:
 	#add the gravity

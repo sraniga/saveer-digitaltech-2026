@@ -71,9 +71,10 @@ offset_right = 9516.0
 offset_bottom = 746.0
 color = Color(0.19973177, 0.19973174, 0.19973174, 1)
 
-[node name="CharacterBody2D" parent="." unique_id=1981202395 node_paths=PackedStringArray("animation") instance=ExtResource("1_cd1xg")]
+[node name="CharacterBody2D" parent="." unique_id=1981202395 node_paths=PackedStringArray("animation", "health_ui") instance=ExtResource("1_cd1xg")]
 position = Vector2(40, 590)
 animation = NodePath("Area2D/AnimationPlayer")
+health_ui = NodePath("../CanvasLayer/ProgressBar")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=564998179]
 position = Vector2(281, -180)
