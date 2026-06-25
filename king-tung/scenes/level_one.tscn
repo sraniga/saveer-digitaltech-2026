@@ -115,6 +115,7 @@ offset_bottom = 88.0
 theme_override_styles/background = SubResource("StyleBoxFlat_843q2")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5rfim")
 value = 100.0
+show_percentage = false
 
 [node name="CharacterBody2D2" parent="." unique_id=1139809648 node_paths=PackedStringArray("player") instance=ExtResource("2_843q2")]
 position = Vector2(583, 522)
