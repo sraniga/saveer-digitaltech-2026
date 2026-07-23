@@ -1,21 +1,53 @@
 [gd_scene format=3 uid="uid://bqredpdd7q4l0"]
 
 [ext_resource type="Script" uid="uid://dp70lh26xs8re" path="res://scripts/player.gd" id="1_s4kpq"]
+[ext_resource type="Texture2D" uid="uid://hlcmbp33tfce" path="res://assets/frame0000.png" id="2_6vkof"]
+[ext_resource type="Texture2D" uid="uid://u5rajxybtkcw" path="res://assets/frame0001.png" id="3_i7g2h"]
+[ext_resource type="Texture2D" uid="uid://c4ytty4w7wbnb" path="res://assets/frame0002.png" id="4_ioaq8"]
+[ext_resource type="Texture2D" uid="uid://bpkwhbja16esp" path="res://assets/frame0003.png" id="5_04igj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2xq51"]
 radius = 20.0
 height = 110.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1981202395 groups=["player"]]
-script = ExtResource("1_s4kpq")
+[sub_resource type="SpriteFrames" id="SpriteFrames_uj5fw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6vkof")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6vkof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_i7g2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ioaq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_04igj")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1194137619]
-offset_left = -20.0
-offset_top = -55.0
-offset_right = 20.0
-offset_bottom = 55.0
-color = Color(0.33, 0.20597501, 0.1485, 1)
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1981202395 node_paths=PackedStringArray("sprite") groups=["player"]]
+script = ExtResource("1_s4kpq")
+sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1736674076]
 shape = SubResource("CapsuleShape2D_2xq51")
 debug_color = Color(0.4665106, 0.25951108, 0.12100633, 0.41960785)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1887288710]
+position = Vector2(9.000001, -4)
+scale = Vector2(1.5312499, 1.8125)
+sprite_frames = SubResource("SpriteFrames_uj5fw")
+animation = &"walk"

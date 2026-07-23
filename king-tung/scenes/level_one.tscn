@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bn3lgnpv7rprw"]
 
 [ext_resource type="PackedScene" uid="uid://bqredpdd7q4l0" path="res://scenes/tung_character.tscn" id="1_cd1xg"]
+[ext_resource type="Texture2D" uid="uid://bfc06f2ne7hce" path="res://assets/Bat.png" id="2_5rfim"]
 [ext_resource type="PackedScene" uid="uid://di8ss3cjc6fto" path="res://scenes/baby_shark.tscn" id="2_843q2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sgp6g"]
@@ -44,7 +45,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5rfim"]
 radius = 5.0
-height = 48.0
+height = 42.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_843q2"]
 bg_color = Color(0.6, 0, 0, 1)
@@ -80,23 +81,21 @@ health_ui = NodePath("../CanvasLayer/ProgressBar")
 position = Vector2(281, -180)
 
 [node name="Area2D" type="Area2D" parent="CharacterBody2D" unique_id=264018145]
-position = Vector2(24, 10)
+position = Vector2(24, 2)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D/Area2D" unique_id=922446303]
 root_node = NodePath("../../..")
 libraries/ = SubResource("AnimationLibrary_843q2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D" unique_id=177811393]
-position = Vector2(0, -22)
+position = Vector2(4, -22)
 shape = SubResource("CapsuleShape2D_5rfim")
 disabled = true
 
-[node name="ColorRect" type="ColorRect" parent="CharacterBody2D/Area2D/CollisionShape2D" unique_id=1042826258]
-offset_left = -3.0
-offset_top = -23.0
-offset_right = 3.0
-offset_bottom = 23.0
-color = Color(0.3882353, 0.23137255, 0.13333334, 1)
+[node name="Bat" type="Sprite2D" parent="CharacterBody2D/Area2D" unique_id=1868695357]
+position = Vector2(-16, -9)
+scale = Vector2(1.6289063, 1.6015625)
+texture = ExtResource("2_5rfim")
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=718771573]
 offset_left = 527.0

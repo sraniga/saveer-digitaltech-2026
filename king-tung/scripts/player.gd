@@ -7,6 +7,8 @@ var health: int = 10
 
 @export var animation: AnimationPlayer
 @export var health_ui: ProgressBar
+@export var sprite: Node
+
 
 func _ready() -> void:
 	health_ui.max_value = health
@@ -25,8 +27,14 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
+		sprite.animation = "walk"
+		if direction == -1:
+			sprite.flip_h = true
+		else:
+			sprite.flip_h = false
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		sprite.animation = "idle"
 		
 	if Input.is_action_just_pressed("swing_bat"):
 		animation.play("swing")
