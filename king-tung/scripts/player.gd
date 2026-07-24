@@ -8,6 +8,7 @@ var health: int = 10
 @export var animation: AnimationPlayer
 @export var health_ui: ProgressBar
 @export var sprite: Node
+@export var center_pivot: Node2D
 
 
 func _ready() -> void:
@@ -27,11 +28,14 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
-		sprite.animation = "walk"
-		if direction == -1:
-			sprite.flip_h = true
-		else:
-			sprite.flip_h = false
+		sprite.play("walk")
+		if not center_pivot.scale.x == direction:
+			center_pivot.scale.x = direction
+			print(center_pivot.scale.x)
+		#if direction == -1:
+			#sprite.flip_h = true
+		#else:
+			#sprite.flip_h = false
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		sprite.animation = "idle"
