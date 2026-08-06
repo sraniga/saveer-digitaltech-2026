@@ -12,6 +12,7 @@ var health: int = 10
 
 
 func _ready() -> void:
+	#health ui
 	health_ui.max_value = health
 	health_ui.value = health
 

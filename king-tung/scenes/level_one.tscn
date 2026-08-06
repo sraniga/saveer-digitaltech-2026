@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bn3lgnpv7rprw"]
 
+[ext_resource type="Script" uid="uid://c53o16xqygj4n" path="res://scripts/level_one.gd" id="1_843q2"]
 [ext_resource type="PackedScene" uid="uid://bqredpdd7q4l0" path="res://scenes/tung_character.tscn" id="1_cd1xg"]
 [ext_resource type="PackedScene" uid="uid://di8ss3cjc6fto" path="res://scenes/baby_shark.tscn" id="2_843q2"]
 
@@ -16,6 +17,7 @@ bg_color = Color(0.6, 0, 0, 1)
 bg_color = Color(0.4402667, 0.8, 0.23200002, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1658184175]
+script = ExtResource("1_843q2")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1045525557]
 
@@ -63,3 +65,22 @@ show_percentage = false
 [node name="CharacterBody2D2" parent="." unique_id=1139809648 node_paths=PackedStringArray("player") instance=ExtResource("2_843q2")]
 position = Vector2(583, 522)
 player = NodePath("../CharacterBody2D")
+
+[node name="HowToPlay" type="AcceptDialog" parent="." unique_id=920197198]
+process_mode = 3
+oversampling_override = 1.0
+title = "How To Play"
+initial_position = 1
+size = Vector2i(503, 314)
+visible = true
+ok_button_text = "OK"
+dialog_text = "Defeat the Baby Tralalero's to progress towards the final boss. 
+Controls:	
+W or Up Arrow or Space Bar = Jump
+D or Right Arrow = Move forward
+A or Left Arrow = Move backwards
+
+K = Normal Attack
+M = Block Attacks
+L = Special TUNG Attack
+"
