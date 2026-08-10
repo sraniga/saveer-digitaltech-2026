@@ -4,6 +4,8 @@ const SPEED = 300
 const JUMP_VELOCITY = -500
 
 var health: int = 10
+var basic_damage: int = 1
+var boss_damage: int = 3
 
 @export var animation: AnimationPlayer
 @export var health_ui: ProgressBar
@@ -54,8 +56,7 @@ func take_damage() -> void:
 	else:
 		get_tree().call_deferred("reload_current_scene")
 
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body.take_damage()
+		body.take_damage(basic_damage)
 		

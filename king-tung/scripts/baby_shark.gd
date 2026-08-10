@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 200
 
 var health : int = 3
+var max_health : int = 3
 var damage : int = 1
 var gravity : float = 900
 
@@ -28,12 +29,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 		
 		
-func take_damage() -> void:
-	if health > 1:
-		health -= 1
-		health_ui.value = health
-	else:
+func take_damage(amount: int) -> void:
+	health -= amount
+	health_ui.value = health
+	if health <= 0:
 		queue_free()
+
+func get_health_percent() -> float:
+	return (float(health) / float(max_health)) * 100.0
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
