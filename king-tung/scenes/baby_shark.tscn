@@ -15,6 +15,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8i3ej"]
 radius = 543.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yos1q"]
+radius = 167.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6p34f"]
 radius = 45.0
 height = 90.0
@@ -26,8 +29,8 @@ bg_color = Color(0.6, 0, 0, 1)
 bg_color = Color(0.4392157, 0.8, 0.23137255, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_foc14"]
-radius = 73.0
-height = 146.0
+radius = 21.0
+height = 42.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oww7r"]
 animations = [{
@@ -80,20 +83,23 @@ animations = [{
 "speed": 7.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yos1q"]
-radius = 167.0
-
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1139809648 node_paths=PackedStringArray("player", "health_ui", "sprite", "center_pivot") groups=["enemy"]]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1139809648 node_paths=PackedStringArray("player", "health_ui", "sprite", "center_pivot", "damage_hitbox") groups=["enemy"]]
 script = ExtResource("1_6p34f")
 player = NodePath(".")
 health_ui = NodePath("ProgressBar")
 sprite = NodePath("Node2D/AnimatedSprite2D")
 center_pivot = NodePath("Node2D")
+damage_hitbox = NodePath("Node2D/Area2D/CollisionShape2D")
 
 [node name="DetectionRange" type="Area2D" parent="." unique_id=170171812]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionRange" unique_id=1873074843]
 shape = SubResource("CircleShape2D_8i3ej")
+
+[node name="AttackRange" type="Area2D" parent="." unique_id=24085742]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=1272977972]
+shape = SubResource("CircleShape2D_yos1q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1105395981]
 shape = SubResource("CapsuleShape2D_6p34f")
@@ -113,26 +119,25 @@ show_percentage = false
 [node name="Area2D" type="Area2D" parent="Node2D" unique_id=1747938398]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D" unique_id=1451342504]
-position = Vector2(-328, 22)
+position = Vector2(-41, -13)
 shape = SubResource("CapsuleShape2D_foc14")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D" unique_id=1723721471]
 position = Vector2(-4, -6)
 scale = Vector2(1.90625, 1.8593751)
 sprite_frames = SubResource("SpriteFrames_oww7r")
-animation = &"idle"
+animation = &"attack"
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=1540552796]
 wait_time = 3.0
 one_shot = true
 
-[node name="AttackRange" type="Area2D" parent="." unique_id=24085742]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" unique_id=1272977972]
-shape = SubResource("CircleShape2D_yos1q")
-
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
 [connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
-[connection signal="body_entered" from="Node2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
 [connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
+[connection signal="body_entered" from="Node2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="animation_finished" from="Node2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="Node2D/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

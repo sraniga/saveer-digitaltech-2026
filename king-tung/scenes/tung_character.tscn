@@ -46,7 +46,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ioaq8"]
 radius = 5.0
-height = 42.0
+height = 70.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uj5fw"]
 animations = [{
@@ -96,7 +96,7 @@ root_node = NodePath("../../../..")
 libraries/ = SubResource("AnimationLibrary_i7g2h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D" unique_id=1948514058]
-position = Vector2(4, -22)
+position = Vector2(4, -33)
 shape = SubResource("CapsuleShape2D_ioaq8")
 disabled = true
 

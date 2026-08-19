@@ -5,8 +5,7 @@ extends CharacterBody2D
 
 const SPEED = 200
 
-var health : int = 3
-var max_health : int = 3	# Exported so tougher variants are an inspector change, not a new script
+var health : int 
 var damage : int = 1	# Health removed from the player per contact
 var gravity : float = 900
 var player_detected: bool = false
@@ -15,17 +14,29 @@ var can_attack: bool = true
 var is_attacking: bool = false
 var attack_target: Node2D = null
 
+@export var max_health : int = 3	# Exported so tougher variants are an inspector change, not a new script
 @export var player: CharacterBody2D
 @export var health_ui: ProgressBar
 @export var sprite: Node
 @export var center_pivot: Node2D
+@export var damage_hitbox: CollisionShape2D
 
 func _ready() -> void:
 	# Set here, not at declaration — exported values are applied after
 	# member defaults are evaluated, so it would always use the default.
+	health = max_health
 	health_ui.max_value = health
 	health_ui.value = health
 
+# Plays the attack animation and starts the cooldown.
+# Called from _physics_process when the player is in range.
+func attack() -> void:
+	print("attack called")
+	can_attack = false
+	is_attacking = true
+	sprite.play("attack")
+	print("now playing: ", sprite.animation)
+	$AttackCooldown.start()
 
 func _physics_process(delta: float) -> void:
 
@@ -35,10 +46,11 @@ func _physics_process(delta: float) -> void:
 		
 	# 2. Steering. direction_to() returns a normalised Vector2, so using
 	#    only x gives left/right chase without any vertical flying.
-	if player != null and player_detected and not is_attacking:	# Chase target; null means "stay put"
+	if player != null and player_detected:	# Chase target; null means "stay put"
 		var direction: Vector2 = global_position.direction_to(player.global_position)
 		velocity.x = direction.x * SPEED
-		sprite.play("walk")
+		if not is_attacking:
+			sprite.play("walk")
 		
 		var facing := -signf(direction.x)
 		
@@ -48,6 +60,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)	# No target — decelerate smoothly instead of stopping dead
 		if not is_attacking:
 			sprite.play("idle")
+			
+	# Attack if the player is in range and the cooldown has elapsed
+	if player_in_range and can_attack:
+		attack()
 		
 	# 3. Last — move_and_slide() acts on the final velocity.
 	move_and_slide()
@@ -72,7 +88,7 @@ func get_health_percent() -> float:
 # The group check stops the enemy damaging walls or other enemies.
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		body.take_damage()
+		body.take_damage(damage)
 
 
 func _on_attack_range_body_entered(body: Node2D) -> void:
@@ -85,6 +101,10 @@ func _on_attack_range_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = false
 		attack_target = null
+		if is_attacking:
+			is_attacking = false
+			damage_hitbox.set_deferred("disabled", true)
+			sprite.play("walk")
 
 
 func _on_detection_range_body_entered(body: Node2D) -> void:
@@ -95,3 +115,22 @@ func _on_detection_range_body_entered(body: Node2D) -> void:
 func _on_detection_range_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_detected = false
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	# Only the attack animation drives the hitbox
+	if sprite.animation != "attack":
+		return
+	if sprite.frame == 1:
+		damage_hitbox.set_deferred("disabled", false)
+	elif sprite.frame == 3:
+		damage_hitbox.set_deferred("disabled", true)
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	is_attacking = false
+	damage_hitbox.set_deferred("disabled", true)
+
+
+func _on_attack_cooldown_timeout() -> void:
+	can_attack = true

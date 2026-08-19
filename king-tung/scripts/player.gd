@@ -58,9 +58,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 # Reduces player health and restarts the level on death.
-func take_damage() -> void:
+func take_damage(amount: int) -> void:
 	if health > 1:
-		health -= 1
+		health -= amount
 		health_ui.value = health
 	else:
 		# Deferred because this runs during collision processing — reloading
