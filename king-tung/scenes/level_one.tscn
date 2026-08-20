@@ -16,6 +16,9 @@ bg_color = Color(0.6, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rfim"]
 bg_color = Color(0.4402667, 0.8, 0.23200002, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r4wdr"]
+bg_color = Color(0, 0.78245145, 0.85899913, 1)
+
 [node name="Node2D" type="Node2D" unique_id=1658184175]
 script = ExtResource("1_843q2")
 
@@ -36,12 +39,17 @@ offset_right = 9516.0
 offset_bottom = 746.0
 color = Color(0.19973177, 0.19973174, 0.19973174, 1)
 
-[node name="CharacterBody2D" parent="." unique_id=1981202395 node_paths=PackedStringArray("health_ui") instance=ExtResource("1_cd1xg")]
+[node name="CharacterBody2D" parent="." unique_id=1981202395 node_paths=PackedStringArray("health_ui", "stamina_ui") instance=ExtResource("1_cd1xg")]
 position = Vector2(40, 590)
 health_ui = NodePath("../CanvasLayer/ProgressBar")
+stamina_ui = NodePath("../CanvasLayer/ProgressBar2")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=564998179]
 position = Vector2(281, -180)
+
+[node name="StaminaRecharge" type="Timer" parent="CharacterBody2D" unique_id=1572056533]
+wait_time = 3.0
+one_shot = true
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=718771573]
 offset_left = 527.0
@@ -59,6 +67,16 @@ offset_right = 314.0
 offset_bottom = 88.0
 theme_override_styles/background = SubResource("StyleBoxFlat_843q2")
 theme_override_styles/fill = SubResource("StyleBoxFlat_5rfim")
+value = 100.0
+show_percentage = false
+
+[node name="ProgressBar2" type="ProgressBar" parent="CanvasLayer" unique_id=1146079246]
+offset_left = 29.0
+offset_top = 107.0
+offset_right = 314.0
+offset_bottom = 138.0
+theme_override_styles/background = SubResource("StyleBoxFlat_843q2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r4wdr")
 value = 100.0
 show_percentage = false
 
@@ -84,3 +102,5 @@ K = Normal Attack
 M = Block Attacks
 L = Special TUNG Attack
 "
+
+[connection signal="timeout" from="CharacterBody2D/StaminaRecharge" to="CharacterBody2D" method="_on_stamina_recharge_timeout"]

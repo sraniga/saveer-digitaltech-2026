@@ -45,8 +45,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ioaq8"]
-radius = 5.0
-height = 70.0
+radius = 8.0
+height = 80.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_uj5fw"]
 animations = [{
@@ -96,13 +96,13 @@ root_node = NodePath("../../../..")
 libraries/ = SubResource("AnimationLibrary_i7g2h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D" unique_id=1948514058]
-position = Vector2(4, -33)
+position = Vector2(7, -39)
 shape = SubResource("CapsuleShape2D_ioaq8")
 disabled = true
 
 [node name="Bat" type="Sprite2D" parent="Node2D/Area2D" unique_id=1202052815]
-position = Vector2(-16, -9)
-scale = Vector2(1.6289063, 1.6015625)
+position = Vector2(-16.5625, -9.375002)
+scale = Vector2(1.8613282, 1.8632814)
 texture = ExtResource("6_6vkof")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D" unique_id=1887288710]
