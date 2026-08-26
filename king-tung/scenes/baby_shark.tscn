@@ -130,7 +130,7 @@ sprite_frames = SubResource("SpriteFrames_oww7r")
 animation = &"attack"
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=1540552796]
-wait_time = 3.0
+wait_time = 4.0
 one_shot = true
 
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
