@@ -66,6 +66,7 @@ func _physics_process(delta: float) -> void:
 		attack()
 		
 	# 3. Last — move_and_slide() acts on the final velocity.
+	print(velocity.x)
 	move_and_slide()
 		
 		
