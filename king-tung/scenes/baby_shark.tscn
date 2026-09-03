@@ -83,13 +83,14 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1139809648 node_paths=PackedStringArray("player", "health_ui", "sprite", "center_pivot", "damage_hitbox") groups=["enemy"]]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1139809648 node_paths=PackedStringArray("player", "health_ui", "sprite", "center_pivot", "damage_hitbox", "attack_cooldown") groups=["enemy"]]
 script = ExtResource("1_6p34f")
 player = NodePath(".")
 health_ui = NodePath("ProgressBar")
 sprite = NodePath("Node2D/AnimatedSprite2D")
 center_pivot = NodePath("Node2D")
 damage_hitbox = NodePath("Node2D/Area2D/CollisionShape2D")
+attack_cooldown = NodePath("AttackCooldown")
 
 [node name="DetectionRange" type="Area2D" parent="." unique_id=170171812]
 

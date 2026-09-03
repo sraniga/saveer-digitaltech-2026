@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dj2g6tabu2jsc"]
+
+[ext_resource type="Texture2D" uid="uid://cb3vjedjdtai7" path="res://assets/Screenshot 2026-09-01 at 12.55.38 PM.png" id="1_f1d2v"]
+[ext_resource type="Script" uid="uid://b1jgqqf6d3f3g" path="res://scripts/pause.gd" id="1_r8yp4"]
+
+[node name="Control" type="Control" unique_id=1196217615]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r8yp4")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1185160711]
+layout_mode = 0
+offset_right = 953.0
+offset_bottom = 497.0
+texture = ExtResource("1_f1d2v")
+
+[node name="Resume" type="Button" parent="." unique_id=307362301]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 142.0
+offset_right = 228.0
+offset_bottom = 247.0
+flat = true
+
+[node name="MainMenu" type="Button" parent="." unique_id=599767540]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 151.0
+offset_right = 625.0
+offset_bottom = 242.0
+flat = true
