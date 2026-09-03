@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cb3vjedjdtai7" path="res://assets/Screenshot 2026-09-01 at 12.55.38 PM.png" id="1_f1d2v"]
 [ext_resource type="Script" uid="uid://b1jgqqf6d3f3g" path="res://scripts/pause.gd" id="1_r8yp4"]
 
-[node name="Control" type="Control" unique_id=1196217615]
+[node name="Control" type="Control" unique_id=1196217615 node_paths=PackedStringArray("resume_button", "main_menu_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r8yp4")
+resume_button = NodePath("Resume")
+main_menu_button = NodePath("MainMenu")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1185160711]
 layout_mode = 0

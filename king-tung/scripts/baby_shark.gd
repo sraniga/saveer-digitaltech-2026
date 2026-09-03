@@ -55,6 +55,14 @@ func attack() -> void:
 	is_attacking = true
 	sprite.play(ANIM_ATTACK)
 	attack_cooldown.start()
+	
+
+# Cancels any attack in progress and disables the damage hitbox.
+# Called on resume so a paused mid-swing enemy doesn't stay armed.
+func cancel_attack() -> void:
+	is_attacking = false
+	damage_hitbox.set_deferred(PROP_DISABLED, true)
+
 
 func _physics_process(delta: float) -> void:
 

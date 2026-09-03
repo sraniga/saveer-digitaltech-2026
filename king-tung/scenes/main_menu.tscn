@@ -1,22 +1,24 @@
 [gd_scene format=3 uid="uid://bfc88t8mvouwa"]
 
-[ext_resource type="Texture2D" uid="uid://fyfgndf72pfp" path="res://assets/Screenshot 2026-08-06 at 2.27.52 PM.png" id="1_5p55f"]
-[ext_resource type="Script" uid="uid://dbinknbh858b4" path="res://scripts/control.gd" id="1_r67kn"]
+[ext_resource type="Script" uid="uid://dbinknbh858b4" path="res://scripts/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://fyfgndf72pfp" path="res://assets/Screenshot 2026-08-06 at 2.27.52 PM.png" id="2_bqqt6"]
 
-[node name="Control" type="Control" unique_id=1720470539]
+[node name="Control" type="Control" unique_id=1720470539 node_paths=PackedStringArray("play_button", "quit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_r67kn")
+script = ExtResource("1_ekxnf")
+play_button = NodePath("Play")
+quit_button = NodePath("Quit")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=17577699]
 layout_mode = 0
 offset_right = 1157.0
 offset_bottom = 653.0
-texture = ExtResource("1_5p55f")
+texture = ExtResource("2_bqqt6")
 
 [node name="Play" type="Button" parent="." unique_id=526584015]
 layout_mode = 0
