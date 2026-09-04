@@ -83,7 +83,8 @@ func _physics_process(delta: float) -> void:
 		if direction.x != 0 and center_pivot.scale.x != facing:
 			center_pivot.scale.x = facing
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)	# No target — decelerate smoothly instead of stopping dead
+		# No target — decelerate smoothly instead of stopping dead
+		velocity.x = move_toward(velocity.x, 0, SPEED)
 		if not is_attacking:
 			sprite.play(ANIM_IDLE)
 			
@@ -104,7 +105,7 @@ func take_damage(amount: int) -> void:
 	if get_health_percent() < LOW_HEALTH_WARNING:
 		health_ui.modulate = Color.RED
 	if health <= 0:
-		queue_free()	  # Removes this enemy from the scene tree
+		queue_free()  # Removes this enemy from the scene tree
 
 
 # Returns current health as a percentage, 0.0 to 100.0.

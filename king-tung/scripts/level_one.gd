@@ -5,6 +5,7 @@ extends Node2D
 const PAUSE := "pause"
 
 @export var pause_menu: Control
+@export var how_to_play: AcceptDialog
 
 func _ready() -> void:
 	# Order is deliberate:
@@ -12,8 +13,9 @@ func _ready() -> void:
 	#   2. Connect confirmed before the player can click OK.
 	#   3. Pause last — the dialog's Process Mode is "Always", so it
 	#      stays interactive while everything else is frozen.
-	$HowToPlay.popup_centered()
-	$HowToPlay.confirmed.connect(_on_how_to_play_closed)
+	how_to_play.popup_centered()
+	how_to_play.confirmed.connect(_on_how_to_play_closed) 
+	how_to_play.canceled.connect(_on_how_to_play_closed)
 	get_tree().paused = true
 
 
@@ -25,7 +27,7 @@ func _on_how_to_play_closed() -> void:
 # Handles the pause key. Ignored while the How To Play dialog is open,
 # so Escape can't unpause before the player has dismissed it.
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed(PAUSE) and not $HowToPlay.visible:
+	if event.is_action_pressed(PAUSE) and not how_to_play.visible:
 		toggle_pause()
 
 
